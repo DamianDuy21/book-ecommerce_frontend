@@ -79,16 +79,22 @@ const SiderMenu = (props) => {
     }
     useEffect(() => {
         searchNameForm.setFieldsValue({ pSearchName: searchNameReducer });
-        const fetchCategories = async () => {
-            const response = await getCategories()
-            if (response) {
-                let cateArray = response.data.data.map(item => {
-                    return item.name
-                })
-                setCategories(cateArray)
+
+        try {
+            const fetchCategories = async () => {
+                const response = await getCategories()
+                if (response) {
+                    let cateArray = response.data.data.map(item => {
+                        return item.name
+                    })
+                    setCategories(cateArray)
+                }
             }
+            fetchCategories()
+        } catch (err) {
+            console.log(err)
         }
-        fetchCategories()
+
     }, [searchNameReducer, searchNameForm, categories]);
     if (!categories) {
         return null
