@@ -90,107 +90,111 @@ const SiderMenu = (props) => {
         }
         fetchCategories()
     }, [searchNameReducer, searchNameForm, categories]);
-    return (
-        <div className='siderMenu'>
-            {isOverlay ? (<>
+    if (!categories) {
+        return null
+    }
+    else
+        return (
+            <div className='siderMenu'>
+                {isOverlay ? (<>
 
-                <div className='title small-title' style={{
-                    textAlign: "center",
-                    padding: "12px 0 12px 0px",
-                }}>Bộ lọc</div>
-                <Form autoComplete="off"
-                    onFinish={onFinish}
-                    onChange={onChange}
-                    style={{
-                        padding: "6px 12px 0px 12px"
-                    }}
-                    form={searchNameForm}
-                >
-                    <Form.Item
-                        name="pSearchName"
-                        style={formItemStyle}
+                    <div className='title small-title' style={{
+                        textAlign: "center",
+                        padding: "12px 0 12px 0px",
+                    }}>Bộ lọc</div>
+                    <Form autoComplete="off"
+                        onFinish={onFinish}
+                        onChange={onChange}
+                        style={{
+                            padding: "6px 12px 0px 12px"
+                        }}
+                        form={searchNameForm}
                     >
-                        <Input placeholder='Tên sản phẩm...' />
-                    </Form.Item>
-                    <Form.Item
-                        style={formItemStyle}
-                    >
-                        <Button style={{ width: "100%", marginTop: "0px" }} type="primary" htmlType="submit">
-                            Tìm kiếm
-                        </Button>
-                    </Form.Item>
-                </Form></>) : (<>
-
-                </>)}
-
-            <Form
-                onFinish={onFilterFinish}
-                form={filterForm}
-            >
-                <div className='category-section'>
-                    {isOverlay ? (<><Divider /></>) : (<></>)}
-
-                    <div className='title small-title' style={{ position: "relative" }}>Thể loại
-                        <div className='reload-icon grow-button' onClick={handleResetFilter}>
-                            <ReloadOutlined />
-                        </div>
-                    </div>
-
-                    <Form.Item name="category" style={{ marginBottom: "0px" }}>
-                        <Checkbox.Group
-                            style={{
-                                width: '100%',
-                            }}
-                            onChange={onChangeCheckBox}
+                        <Form.Item
+                            name="pSearchName"
+                            style={formItemStyle}
                         >
+                            <Input placeholder='Tên sản phẩm...' />
+                        </Form.Item>
+                        <Form.Item
+                            style={formItemStyle}
+                        >
+                            <Button style={{ width: "100%", marginTop: "0px" }} type="primary" htmlType="submit">
+                                Tìm kiếm
+                            </Button>
+                        </Form.Item>
+                    </Form></>) : (<>
 
-                            <Row gutter={[0, 12]}>
-                                {categories && (
-                                    categories.map(item => {
-                                        return (
-                                            <Col span={24}>
-                                                <Checkbox value={item}>{item}</Checkbox>
-                                            </Col>
-                                        )
-                                    })
-                                )}
+                    </>)}
+
+                <Form
+                    onFinish={onFilterFinish}
+                    form={filterForm}
+                >
+                    <div className='category-section'>
+                        {isOverlay ? (<><Divider /></>) : (<></>)}
+
+                        <div className='title small-title' style={{ position: "relative" }}>Thể loại
+                            <div className='reload-icon grow-button' onClick={handleResetFilter}>
+                                <ReloadOutlined />
+                            </div>
+                        </div>
+
+                        <Form.Item name="category" style={{ marginBottom: "0px" }}>
+                            <Checkbox.Group
+                                style={{
+                                    width: '100%',
+                                }}
+                                onChange={onChangeCheckBox}
+                            >
+
+                                <Row gutter={[0, 12]}>
+                                    {categories && (
+                                        categories.map(item => {
+                                            return (
+                                                <Col span={24}>
+                                                    <Checkbox value={item}>{item}</Checkbox>
+                                                </Col>
+                                            )
+                                        })
+                                    )}
 
 
-                            </Row>
-                        </Checkbox.Group>
-                    </Form.Item>
+                                </Row>
+                            </Checkbox.Group>
+                        </Form.Item>
 
 
-                </div>
-                <div className='price-section'>
-                    <Divider />
-                    <div className='title small-title'>Khoảng giá</div>
-                    <Form.Item name="priceRange" style={{ margin: "-12px 0 0 0" }}>
-                        <Slider
-                            range={{
-                                draggableTrack: true,
-                            }}
-                            defaultValue={[0, 10000000]}
-                            value={range}
-                            onChange={handleSliderChange}
-                        />
-                    </Form.Item>
+                    </div>
+                    <div className='price-section'>
+                        <Divider />
+                        <div className='title small-title'>Khoảng giá</div>
+                        <Form.Item name="priceRange" style={{ margin: "-12px 0 0 0" }}>
+                            <Slider
+                                range={{
+                                    draggableTrack: true,
+                                }}
+                                defaultValue={[0, 10000000]}
+                                value={range}
+                                onChange={handleSliderChange}
+                            />
+                        </Form.Item>
 
-                    <Row gutter={[12, 12]}>
-                        <Col span={24}><span style={{ display: "inline-block", width: "32px" }}>Từ:</span> <span style={{ fontWeight: "550" }}>
-                            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(minPrice)}
-                        </span></Col>
-                        <Col span={24}><span style={{ display: "inline-block", width: "32px" }}>Đến:</span> <span style={{ fontWeight: "550" }}>
-                            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(maxPrice)}
-                        </span></Col>
-                    </Row>
+                        <Row gutter={[12, 12]}>
+                            <Col span={24}><span style={{ display: "inline-block", width: "32px" }}>Từ:</span> <span style={{ fontWeight: "550" }}>
+                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(minPrice)}
+                            </span></Col>
+                            <Col span={24}><span style={{ display: "inline-block", width: "32px" }}>Đến:</span> <span style={{ fontWeight: "550" }}>
+                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(maxPrice)}
+                            </span></Col>
+                        </Row>
 
-                    <Button style={{ width: "100%", marginTop: "12px" }} type="primary" htmlType="submit">
-                        Áp dụng
-                    </Button>
-                </div >
-            </Form>
-        </div>
-    )
+                        <Button style={{ width: "100%", marginTop: "12px" }} type="primary" htmlType="submit">
+                            Áp dụng
+                        </Button>
+                    </div >
+                </Form>
+            </div>
+        )
 }
 export default SiderMenu
