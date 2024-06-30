@@ -1,0 +1,31 @@
+.category-section,
+.price-section {
+    padding: 0 12px;
+    margin-top: 12px;
+
+    .title {
+        margin-bottom: 12px;
+        text-align: center;
+    }
+}
+
+.siderMenu {
+    height: calc(100vh - 64px);
+    padding-bottom: 16px;
+    overflow-y: scroll;
+}
+
+.reload-icon {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-4);
+    transition: ease-in-out 0.25s;
+    scale: 0.9;
+}

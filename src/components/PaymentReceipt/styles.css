@@ -1,0 +1,28 @@
+.cart-info {
+  margin-left: 100px;
+}
+.cart-info .ant-table {
+  min-height: calc(100vh - 530px);
+}
+.cart-info .table {
+  min-height: calc(100vh - 455px);
+}
+
+.cart-product-info {
+  cursor: pointer;
+}
+.cart-product-info:hover .small-title {
+  color: var(--main-blue);
+}
+.cart-product-info .product-price {
+  min-width: 112px;
+}
+
+@media (min-width: 992px) {
+  .cart-container {
+    padding-left: 200px !important;
+  }
+  .cart-info {
+    margin-left: 0;
+  }
+}/*# sourceMappingURL=styles.css.map */

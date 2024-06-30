@@ -1,0 +1,10 @@
+.history-table .ant-spin-container {
+  min-height: calc(100vh - 276px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.history-table .ant-spin-container .ant-pagination {
+  display: flex;
+  justify-content: center;
+}/*# sourceMappingURL=styles.css.map */

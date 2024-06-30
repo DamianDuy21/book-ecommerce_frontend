@@ -1,0 +1,60 @@
+.description-section {
+  height: 196px;
+  position: relative;
+}
+.description-section .description {
+  width: 100%;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.description-section .description .description-layer {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
+  opacity: 1;
+}
+.description-section .moreDes-btn,
+.description-section .lessDes-btn {
+  text-align: center;
+  margin-bottom: 12px;
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  right: 0;
+}
+.description-section .moreDes-btn span,
+.description-section .lessDes-btn span {
+  cursor: pointer;
+  color: var(--main-blue);
+}
+.description-section .moreDes-btn span:hover,
+.description-section .lessDes-btn span:hover {
+  filter: brightness(1.2);
+}
+.description-section .moreDes-btn {
+  display: block;
+}
+.description-section .lessDes-btn {
+  display: none;
+}
+.description-section.active {
+  height: 100%;
+  padding-bottom: 32px;
+}
+.description-section.active .description {
+  height: 100%;
+}
+.description-section.active .description .description-layer {
+  display: none;
+}
+.description-section.active .moreDes-btn {
+  display: none;
+}
+.description-section.active .lessDes-btn {
+  display: block;
+}/*# sourceMappingURL=styles.css.map */

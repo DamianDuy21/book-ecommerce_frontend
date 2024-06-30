@@ -1,0 +1,14 @@
+.history-table {
+    .ant-spin-container {
+        min-height: calc(100vh - 276px);
+        // background-color: red;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .ant-pagination {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

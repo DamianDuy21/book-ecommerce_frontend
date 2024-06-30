@@ -1,0 +1,113 @@
+.steps-2 {
+  position: fixed;
+  top: 64px;
+  bottom: 60px;
+  left: 0;
+  padding: 40px 12px 16px 16px;
+  overflow: hidden;
+  display: none;
+}
+.steps-2 .ant-steps {
+  height: 100%;
+}
+
+.steps-1 {
+  padding: 0 16px;
+}
+.steps-1 .ant-steps {
+  flex-direction: row;
+  margin-bottom: 16px;
+}
+.steps-1 .ant-steps-item-content {
+  min-height: none;
+}
+
+@media (max-width: 568px) {
+  .steps-1 {
+    padding: 0 12px;
+  }
+}
+.cart-info {
+  margin-left: 0px !important;
+}
+.cart-info .ant-result {
+  margin: 80px auto 0 auto;
+}
+.cart-info.cart-done .ant-result {
+  height: calc(86vh - 132px - 32px);
+  margin: 80px auto 0 auto;
+}
+
+.cart-product-info {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 100%;
+  gap: 6px;
+}
+.cart-product-info .product-name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+}
+.cart-product-info .product-name .small-title {
+  max-width: 200px;
+  width: 100%;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  -webkit-line-clamp: 1 !important;
+  white-space: nowrap;
+}
+
+.product-quantity .quantity-section .quantity {
+  max-width: -moz-max-content;
+  max-width: max-content;
+  width: 100%;
+  display: flex;
+  gap: 6px;
+}
+.product-quantity .quantity-section .quantity input {
+  outline: none;
+  border: 1px solid #c9c9c9;
+  border-radius: var(--radius-8);
+  text-align: center;
+  padding: 0px 0px 0 12px;
+}
+.product-quantity .quantity-section .quantity button {
+  width: 16px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 992px) {
+  .steps-2 {
+    width: 200px;
+    display: block;
+  }
+  .steps-1 {
+    display: none;
+  }
+  .cart-container {
+    padding-left: 200px !important;
+  }
+  .cart-info {
+    margin-left: 0;
+  }
+  .cart-product-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  .cart-product-info .product-name {
+    max-width: 75%;
+  }
+  .cart-product-info .product-name .small-title {
+    max-width: 272px;
+  }
+}/*# sourceMappingURL=styles.css.map */

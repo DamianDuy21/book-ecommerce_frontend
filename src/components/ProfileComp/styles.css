@@ -1,0 +1,50 @@
+.ant-image-preview-img-wrapper {
+  padding: 0 16px !important;
+}
+
+.profile-page .statistics-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.profile-page .statistics-section .statistics-item {
+  flex: 1;
+}
+.profile-page .statistics-section .statistics-item span {
+  color: var(--main-blue);
+}
+
+@media (min-width: 768px) {
+  .profile-page .form-content {
+    display: flex;
+  }
+  .profile-page .form-content .upload-section {
+    margin-right: 32px;
+  }
+  .profile-page .form-content .info-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: calc(100vh - 232px);
+  }
+}
+@media (min-width: 1200px) {
+  .profile-page {
+    display: flex;
+    gap: 16px;
+  }
+  .profile-page .statistics-section {
+    order: 1;
+    min-width: 400px;
+    height: -moz-max-content;
+    height: max-content;
+  }
+  .profile-page .profile-form-section {
+    flex: 1;
+    order: 2;
+  }
+  .profile-page .profile-form-section .form-content .upload-section {
+    margin-right: 32px;
+  }
+}/*# sourceMappingURL=styles.css.map */

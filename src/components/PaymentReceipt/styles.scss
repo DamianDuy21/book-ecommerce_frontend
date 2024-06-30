@@ -1,0 +1,42 @@
+.cart-info {
+    margin-left: 100px;
+
+    .ant-table {
+        min-height: calc(100vh - 530px);
+    }
+
+    .table {
+        min-height: calc(100vh - 455px);
+    }
+}
+
+
+.cart-product-info {
+    cursor: pointer;
+
+    &:hover {
+        .small-title {
+            color: var(--main-blue);
+        }
+    }
+
+    .product-price {
+        min-width: 112px;
+    }
+}
+
+
+@media (min-width: 992px) {
+
+    .cart-container {
+        padding-left: 200px !important;
+    }
+
+    .cart-info {
+        margin-left: 0;
+
+        // .ant-table-content {
+        //     min-height: calc(100vh - 458px);
+        // }
+    }
+}

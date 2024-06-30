@@ -1,0 +1,70 @@
+.description-section {
+    height: 196px;
+    position: relative;
+
+    .description {
+        width: 100%;
+        margin-bottom: 12px;
+        position: relative;
+        overflow: hidden;
+
+        .description-layer {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background-image: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
+            opacity: 1;
+        }
+    }
+
+    .moreDes-btn,
+    .lessDes-btn {
+        text-align: center;
+        margin-bottom: 12px;
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        right: 0;
+
+        span {
+            cursor: pointer;
+            color: var(--main-blue);
+
+            &:hover {
+                filter: brightness(1.2);
+            }
+        }
+    }
+
+    .moreDes-btn {
+        display: block;
+    }
+
+    .lessDes-btn {
+        display: none;
+    }
+
+    &.active {
+        height: 100%;
+        padding-bottom: 32px;
+
+        .description {
+            height: 100%;
+
+            .description-layer {
+                display: none;
+            }
+        }
+
+        .moreDes-btn {
+            display: none;
+        }
+
+        .lessDes-btn {
+            display: block;
+        }
+    }
+}

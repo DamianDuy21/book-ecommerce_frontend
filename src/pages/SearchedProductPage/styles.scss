@@ -1,0 +1,11 @@
+.searched-products-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+    gap: 12px;
+}
+
+.searched-products-pagination {
+    // background-color: red;
+    text-align: center;
+    margin-top: 32px;
+}
