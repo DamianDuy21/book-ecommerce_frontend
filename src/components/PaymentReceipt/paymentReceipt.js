@@ -264,9 +264,9 @@ const PaymentReceipt = (props) => {
                     </div>
                     <div className='tiny-title'>Phiếu giảm giá:</div>
                     <div className='option-buttons'>
-                        {[...Array(6)].map((_, index) => (
+                        {/* {[...Array(6)].map((_, index) => (
                             <Button key={index} className='option-button'>-20% (tối đa 80k)</Button>
-                        ))}
+                        ))} */}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px", flexWrap: "wrap", gap: "6px" }}>
                         <div className='ship tiny-title'>Phí vận chuyển: <span className='medium-title'>
