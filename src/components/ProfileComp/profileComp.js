@@ -9,7 +9,11 @@ import { useDispatch } from "react-redux";
 import { doUpdateUser } from "../../redux/AuthenReducer/authenReducer";
 import LoadingTheme from "../LoadingTheme/loadingTheme";
 import TextArea from "antd/es/input/TextArea";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../../firebase";
+import { v4 } from "uuid";
 const ProfileComp = (props) => {
+    const [imgUrl, setImgUrl] = useState(null);
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [fileList, setFileList] = useState([]);
@@ -36,7 +40,7 @@ const ProfileComp = (props) => {
         setPreviewImage(file.url || file.preview);
         setPreviewOpen(true);
     };
-    const handleChange = ({ fileList: newFileList }) => { setFileList(newFileList) };
+    const handleChange = ({ fileList: newFileList }) => { console.log(fileList); setFileList(newFileList) };
 
     const uploadButton = (
         <button
@@ -59,16 +63,32 @@ const ProfileComp = (props) => {
     );
     const onFinish = async (values) => {
         try {
+
             setLoading(true)
             let newValues = null
             if (fileList[0]) {
                 if (fileList[0].originFileObj) {
-                    const formData = new FormData();
-                    formData.append('image', fileList[0].originFileObj);
-                    const avatarResponse = await postAvatar(formData);
-                    newValues = {
-                        ...values,
-                        avatar: avatarResponse.data.path
+                    const file = (fileList[0].originFileObj)
+                    const storageRef = ref(storage, `files/${file.name}-${v4()}`);
+                    const uploadTask = await uploadBytesResumable(storageRef, file);
+
+                    if (uploadTask) {
+                        // console.log('Upload task:', uploadTask);
+
+                        // Ensure that snapshot is defined
+                        if (uploadTask.task.snapshot && uploadTask.task.snapshot.ref) {
+                            const imgUrl = await getDownloadURL(uploadTask.task.snapshot.ref);
+                            console.log('Image URL:', imgUrl);
+
+                            newValues = {
+                                ...values,
+                                avatar: imgUrl
+                            }
+                        } else {
+                            console.error('Snapshot or snapshot.ref is undefined', uploadTask.task.snapshot);
+                        }
+                    } else {
+                        console.error('Upload task is undefined');
                     }
                 }
                 else {
@@ -86,9 +106,6 @@ const ProfileComp = (props) => {
             }
             const response = await updateUser(userID, newValues)
             const newUser = await getUsers(`_id=${userID}`)
-            // console.log(response)
-            // console.log(newUser)
-            // console.log(fileList)
             dispatch(doUpdateUser({
                 avatar: newUser.data.data[0].avatar,
                 userName: newUser.data.data[0].username,
@@ -134,14 +151,22 @@ const ProfileComp = (props) => {
                 const data = (response.data.data[0])
                 setUser(data)
                 if (data.avatar) {
+                    console.log(data.avatar)
                     setPreviewImage(data.avatar)
-                    setFileList([{ url: `https://book-ecommerce-backend.onrender.com/images/avatar/${data.avatar}` }])
+                    setFileList([
+                        //     {
+                        //     uid: '1',
+                        //     name: 'avatar',
+                        //     status: 'done',
+                        //     url: data.avatar,
+                        // }
+                    ])
                 }
                 infoForm.setFieldsValue(data)
             }
         }
         fetchUser()
-    }, [userID])
+    }, [userID, imgUrl])
     if (!user) {
         return <LoadingTheme />
     }

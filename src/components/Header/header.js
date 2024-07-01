@@ -31,7 +31,6 @@ const Headerr = (props) => {
     const [userOptionsActive, setUserOptionsActive] = useState(false);
     const path = useLocation();
     const pathname = path.pathname;
-
     const userOptionsRef = useRef(null);
     const userSettingRef = useRef(null);
 
@@ -51,7 +50,6 @@ const Headerr = (props) => {
     }
     useEffect(() => {
         setAvatar(user.avatar);
-
         const handleClickOutside = (event) => {
             if (
                 userOptionsRef.current &&
@@ -119,7 +117,7 @@ const Headerr = (props) => {
                             <>
                                 {user.avatar !== "" ? (
                                     <div className='avatar'>
-                                        <img className='img-cover' src={`https://book-ecommerce-backend.onrender.com/images/avatar/${avatar}`} />
+                                        <img className='img-cover' src={`${avatar}`} />
                                     </div>
                                 ) : (
                                     <Avatar className='' shape="square" size={32} icon={<UserOutlined />} />
