@@ -18,7 +18,6 @@ const BuyNowPage = () => {
 
     const params = useParams()
     const productId = params.id
-
     const handleAddToBuyNow = (product) => {
         const productt = {
             _id: product._id,
@@ -42,7 +41,7 @@ const BuyNowPage = () => {
                 try {
                     const response = await getProductByRequest(`_id=${productId}`);
                     if (response && Array.isArray(response.data.data)) {
-                        handleAddToBuyNow(response.data.data[0])
+                        handleAddToBuyNow({ ...response.data.data[0] })
                     } else {
                         console.error('Unexpected response format', response);
                     }

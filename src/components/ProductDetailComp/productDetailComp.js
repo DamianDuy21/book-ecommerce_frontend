@@ -21,7 +21,7 @@ const ProductDetailComp = (props) => {
             thumbnail: product.thumbnail,
             name: product.name,
             price: (product.price - product.price / 100 * product.discount),
-            quantity: 1,
+            quantity: currentQuantity,
             postedBy: product.postedBy,
             discount: product.discount,
             author: product.author,
@@ -31,7 +31,7 @@ const ProductDetailComp = (props) => {
         dispatch(doAddToCart(productt))
     }
     const handleAddToBuyNow = () => {
-        dispatch(doAddToBuyNow({
+        const productt = {
             _id: product._id,
             thumbnail: product.thumbnail,
             name: product.name,
@@ -41,7 +41,9 @@ const ProductDetailComp = (props) => {
             discount: product.discount,
             author: product.author,
             sold: product.sold
-        }))
+        }
+        console.log(productt)
+        dispatch(doAddToBuyNow(productt))
         nav(`/buy-now/${product._id}`)
     }
 
@@ -59,7 +61,7 @@ const ProductDetailComp = (props) => {
         }
 
         getImages(product)
-    }, [product])
+    }, [product, currentQuantity])
 
     return (<>
         <div className="detail-wrapper">
@@ -103,24 +105,7 @@ const ProductDetailComp = (props) => {
                     <div style={{ width: "100%", overflow: "hidden" }}>
                         <div className="tiny-title" style={{ marginBottom: "6px" }}>Ưu đãi:</div>
                         <div className="discounts">
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
-                            <div className='discount'>-20%</div>
+                            <div className='discount'>-{product.discount}%</div>
                         </div>
 
                         <div className="quantity-section">
@@ -170,24 +155,7 @@ const ProductDetailComp = (props) => {
                 <div style={{ width: "100%", overflow: "hidden" }}>
                     <div className="tiny-title" style={{ marginBottom: "6px" }}>Ưu đãi:</div>
                     <div className="discounts">
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
-                        <div className='discount'>-20%</div>
+                        <div className='discount'>-{product.discount}%</div>
                     </div>
 
                     <div className="quantity-section">

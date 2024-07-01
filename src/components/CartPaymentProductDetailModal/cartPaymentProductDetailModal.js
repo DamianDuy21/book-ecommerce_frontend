@@ -94,7 +94,7 @@ const CartPaymentProductDetailModal = (props) => {
                                 <div className="quantity-section">
                                     <div className="quantity">
                                         <Button
-                                            disabled={data?.quantity == 1}
+                                            disabled={currentQuantityCart == 1}
                                             onClick={() => {
                                                 setCurrentQuantityCart(currentQuantityCart - 1)
                                             }}
