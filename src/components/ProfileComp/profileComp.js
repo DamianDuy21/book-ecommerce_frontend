@@ -153,14 +153,11 @@ const ProfileComp = (props) => {
                 if (data.avatar) {
                     console.log(data.avatar)
                     setPreviewImage(data.avatar)
-                    setFileList([
-                        //     {
-                        //     uid: '1',
-                        //     name: 'avatar',
-                        //     status: 'done',
-                        //     url: data.avatar,
-                        // }
-                    ])
+                    // setFileList([
+                    //     {
+                    //         url: user.avatar,
+                    //     }
+                    // ])
                 }
                 infoForm.setFieldsValue(data)
             }
@@ -202,15 +199,22 @@ const ProfileComp = (props) => {
                                 <div className="upload-section" style={{ marginBottom: "16px" }}>
                                     <div className="tiny-title" style={{ marginBottom: "10px" }}>Avatar:</div>
                                     <Upload
-                                        // action="https://book-ecommerce-backend.onrender.com/v1/api/user/avatar"
+
                                         listType="picture-card"
                                         fileList={fileList}
                                         onPreview={handlePreview}
                                         onChange={handleChange}
                                         beforeUpload={() => false}
-
+                                        maxCount={1}
                                     >
-                                        {fileList.length >= 1 ? null : uploadButton}
+                                        {user.avatar != "" ? <img
+                                            src={user.avatar}
+                                            alt="avatar"
+                                            style={{
+                                                maxWidth: "90px",
+                                                maxHeight: "90px",
+                                            }}
+                                        /> : uploadButton}
                                     </Upload>
                                     {previewImage && (
                                         <Image style={{ padding: "0 12px !important" }}

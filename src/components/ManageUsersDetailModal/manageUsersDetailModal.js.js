@@ -1,18 +1,18 @@
 import { message, Button, Col, Form, Image, Input, Row, Statistic, Upload, Modal } from "antd"
 import { useEffect, useState } from "react";
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import CountUp from 'react-countup';
-import { useParams } from "react-router-dom";
 import { getUsers, postAvatar, updateUser } from "../../services/userServices";
 import { useDispatch, useSelector } from "react-redux";
 import { doUpdateUser } from "../../redux/AuthenReducer/authenReducer";
 import LoadingTheme from "../LoadingTheme/loadingTheme";
 import TextArea from "antd/es/input/TextArea";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../../firebase";
+import { v4 } from "uuid";
 const ManageUsersDetailModal = (props) => {
     const sortBy = useSelector(state => state.manage.sortBy)
     const sortOrder = useSelector(state => state.manage.sortOrder)
     const { isModalOpen, setIsModalOpen, data, handleSort } = props;
-    console.log(isModalOpen)
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [fileList, setFileList] = useState([]);
@@ -62,12 +62,27 @@ const ManageUsersDetailModal = (props) => {
             let newValues = null
             if (fileList[0]) {
                 if (fileList[0].originFileObj) {
-                    const formData = new FormData();
-                    formData.append('image', fileList[0].originFileObj);
-                    const avatarResponse = await postAvatar(formData);
-                    newValues = {
-                        ...values,
-                        avatar: avatarResponse.data.path
+                    const file = (fileList[0].originFileObj)
+                    const storageRef = ref(storage, `files/${file.name}-${v4()}`);
+                    const uploadTask = await uploadBytesResumable(storageRef, file);
+
+                    if (uploadTask) {
+                        // console.log('Upload task:', uploadTask);
+
+                        // Ensure that snapshot is defined
+                        if (uploadTask.task.snapshot && uploadTask.task.snapshot.ref) {
+                            const imgUrl = await getDownloadURL(uploadTask.task.snapshot.ref);
+                            console.log('Image URL:', imgUrl);
+
+                            newValues = {
+                                ...values,
+                                avatar: imgUrl
+                            }
+                        } else {
+                            console.error('Snapshot or snapshot.ref is undefined', uploadTask.task.snapshot);
+                        }
+                    } else {
+                        console.error('Upload task is undefined');
                     }
                 }
                 else {
@@ -127,11 +142,11 @@ const ManageUsersDetailModal = (props) => {
         const fetchUser = async (data) => {
             if (data.avatar != "") {
                 setPreviewImage(data.avatar)
-                setFileList([{ url: `https://book-ecommerce-backend.onrender.com/images/avatar/${data.avatar}` }])
+
             }
             else {
                 setPreviewImage(null)
-                setFileList([])
+
             }
             infoForm.setFieldsValue(data)
         }
@@ -179,7 +194,14 @@ const ManageUsersDetailModal = (props) => {
                                             beforeUpload={() => false}
 
                                         >
-                                            {fileList.length >= 1 ? null : uploadButton}
+                                            {data.avatar != "" ? <img
+                                                src={data.avatar}
+                                                alt="avatar"
+                                                style={{
+                                                    maxWidth: "90px",
+                                                    maxHeight: "90px",
+                                                }}
+                                            /> : uploadButton}
                                         </Upload>
                                         {previewImage && (
                                             <Image style={{ padding: "0 12px !important" }}
