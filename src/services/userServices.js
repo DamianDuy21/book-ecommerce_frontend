@@ -56,7 +56,7 @@ export const getUsers = async (values) => {
 
 export const updateUser = async (id, data) => {
     try {
-        const url = `https://book-ecommerce-backend.onrender.com/v1/api/user/${id}`;
+        const url = `${REACT_APP_DB_PATH}/user/${id}`;
         const response = await axios.put(url, data)
         return response
     } catch (err) {
@@ -66,8 +66,7 @@ export const updateUser = async (id, data) => {
 
 export const postAvatar = async (data) => {
     try {
-        console.log(data)
-        const url = `https://book-ecommerce-backend.onrender.com/v1/api/user/avatar`;
+        const url = `${REACT_APP_DB_PATH}/user/avatar`;
         const response = await axios.post(url, data)
         return response
     } catch (err) {

@@ -101,7 +101,7 @@ const Headerr = (props) => {
                             if (pathname !== "/") {
                                 nav("/");
                             }
-                        }}>Logo</div>
+                        }}>iBook</div>
                     </div>
                     <div className='user'>
                         {!isOverlay && !noSider && (

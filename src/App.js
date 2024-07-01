@@ -6,7 +6,7 @@ function App() {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Book Ecom</title>
+        <title>iBook</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       <AllRoutes />
