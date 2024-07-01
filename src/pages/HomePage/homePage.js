@@ -19,13 +19,16 @@ const HomePage = () => {
             const responseMostBuyProducts = await getProductByRequest("limit=10&page=1&sort=-sold");
             const responseMostDiscountProducts = await getProductByRequest("limit=10&page=1&sort=-discount");
 
-            const LP = responseLastestProducts.data.data;
-            const BP = responseMostBuyProducts.data.data;
-            const DP = responseMostDiscountProducts.data.data;
+            if (responseLastestProducts && responseMostBuyProducts && responseMostDiscountProducts) {
+                const LP = responseLastestProducts.data.data;
+                const BP = responseMostBuyProducts.data.data;
+                const DP = responseMostDiscountProducts.data.data;
+                setMostBuyProducts(BP);
+                setMostDiscountProducts(DP);
+                setLastestProducts(LP);
+            }
 
-            setMostBuyProducts(BP);
-            setMostDiscountProducts(DP);
-            setLastestProducts(LP);
+
         };
         getProducts();
     }, []);
