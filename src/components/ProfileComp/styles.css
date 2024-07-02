@@ -15,9 +15,6 @@
 }
 
 @media (min-width: 768px) {
-  .profile-page .form-content {
-    display: flex;
-  }
   .profile-page .form-content .upload-section {
     margin-right: 32px;
   }

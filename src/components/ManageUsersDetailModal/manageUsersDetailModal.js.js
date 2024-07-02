@@ -137,6 +137,7 @@ const ManageUsersDetailModal = (props) => {
     const [infoForm] = Form.useForm()
     const handleCancel = () => {
         setIsModalOpen(false);
+        setFileList([])
     };
     useEffect(() => {
         const fetchUser = async (data) => {
@@ -193,6 +194,7 @@ const ManageUsersDetailModal = (props) => {
                                             onChange={handleChange}
                                             beforeUpload={() => false}
                                             maxCount={1}
+
                                         >
                                             {data.avatar != "" && fileList.length == 0 ? <img
                                                 src={data.avatar}
