@@ -40,7 +40,7 @@ const ProfileComp = (props) => {
         setPreviewImage(file.url || file.preview);
         setPreviewOpen(true);
     };
-    const handleChange = ({ fileList: newFileList }) => { console.log(fileList); setFileList(newFileList) };
+    const handleChange = ({ fileList: newFileList }) => { setFileList(newFileList) };
 
     const uploadButton = (
         <button
@@ -163,7 +163,7 @@ const ProfileComp = (props) => {
             }
         }
         fetchUser()
-    }, [userID, imgUrl])
+    }, [userID, imgUrl, fileList])
     if (!user) {
         return <LoadingTheme />
     }
@@ -207,7 +207,7 @@ const ProfileComp = (props) => {
                                         beforeUpload={() => false}
                                         maxCount={1}
                                     >
-                                        {user.avatar != "" ? <img
+                                        {user.avatar != "" && fileList.length == 0 ? <img
                                             src={user.avatar}
                                             alt="avatar"
                                             style={{

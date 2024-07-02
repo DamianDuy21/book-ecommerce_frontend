@@ -154,7 +154,7 @@ const ManageUsersDetailModal = (props) => {
             fetchUser(data)
         }
 
-    }, [data, isModalOpen])
+    }, [data, isModalOpen, fileList])
     if (!data) {
         return <LoadingTheme />
     }
@@ -192,9 +192,9 @@ const ManageUsersDetailModal = (props) => {
                                             onPreview={handlePreview}
                                             onChange={handleChange}
                                             beforeUpload={() => false}
-
+                                            maxCount={1}
                                         >
-                                            {data.avatar != "" ? <img
+                                            {data.avatar != "" && fileList.length == 0 ? <img
                                                 src={data.avatar}
                                                 alt="avatar"
                                                 style={{
