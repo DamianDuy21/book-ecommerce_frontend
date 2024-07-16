@@ -25,7 +25,7 @@ const ReceiptDetailPage = () => {
       const response = await getReceipts(`_id=${receiptId}`);
       if (response) {
         console.log(response);
-        setReceipt(response.data.data[0]);
+        setReceipt(response.data[0]);
       }
     };
     fetchReceipt();
