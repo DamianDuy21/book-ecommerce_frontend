@@ -1,6 +1,6 @@
 .searched-products-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 0.5fr));
   gap: 12px;
 }
 

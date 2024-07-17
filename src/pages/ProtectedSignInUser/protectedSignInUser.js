@@ -21,9 +21,9 @@ const ProtectedSignInUser = () => {
         const response = await authenToken();
         console.log(response);
         if (response.ec && response.ec != 200) {
+          dispatch(doSignOutAction());
           setIsModalOpen(true);
           localStorage.clear();
-          dispatch(doSignOutAction());
         }
       }
     };
@@ -34,7 +34,7 @@ const ProtectedSignInUser = () => {
     } else {
       setIsModalOpen(true);
     }
-  }, []);
+  }, [isAuthen]);
   return (
     <>
       <AuthenModal
