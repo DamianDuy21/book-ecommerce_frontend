@@ -7,4 +7,12 @@
 .searched-products-pagination {
   text-align: center;
   margin-top: 32px;
+}
+
+@media (max-width: 500px) {
+  .searched-products-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
 }/*# sourceMappingURL=styles.css.map */
