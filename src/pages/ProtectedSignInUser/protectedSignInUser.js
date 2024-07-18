@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import AuthenModal from "../../components/AuthenModal/authenModal";
 import { authenToken } from "../../services/userServices";
 import { doSignOutAction } from "../../redux/AuthenReducer/authenReducer";
-import { getCookie } from "../../helpers/cookies";
+import { deleteAllCookies, getCookie } from "../../helpers/cookies";
 
 const ProtectedSignInUser = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,16 +15,20 @@ const ProtectedSignInUser = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchAuthen = async () => {
-      // console.log(localStorage.getItem("accessToken"));
-      console.log(getCookie("accessToken"));
+      // console.log(getCookie("accessToken"));
       if (getCookie("accessToken")) {
         const response = await authenToken();
         console.log(response);
         if (response.ec && response.ec != 200) {
+          deleteAllCookies();
           dispatch(doSignOutAction());
           setIsModalOpen(true);
           localStorage.clear();
         }
+      } else {
+        dispatch(doSignOutAction());
+        setIsModalOpen(true);
+        localStorage.clear();
       }
     };
     fetchAuthen();
